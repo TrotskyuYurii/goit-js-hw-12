@@ -6,8 +6,11 @@ import 'izitoast/dist/css/iziToast.min.css';
 //++simplelightbox
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-//--
-//--
+
+//++import axios
+import axios from 'axios';
+
+
 
 //++myForm
 const myForm = document.querySelector('form');
@@ -57,7 +60,8 @@ myForm.addEventListener('submit', event => {
 //--
 
 //++pixabay
-function getImage(inputValue) {
+async function getImage(inputValue) {
+
   const API_KEY = '25736683-f5d7a17cce89782c978955728';
   const URL =
     'https://pixabay.com/api/?key=' +
@@ -66,20 +70,10 @@ function getImage(inputValue) {
     encodeURIComponent(inputValue) +
     '&image_type=photo&orientation=horizontal&safe_search=true&per_page=9';
 
-  return fetch(URL)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      return response.json();
-    })
-    .then(posts => {
-      return posts.hits;
-    })
-    .catch(error => {
-      console.log(error);
-      throw error;
-    });
+  const response = await axios.post (URL, );
+
+  return response.data.hits;
+
 }
 //--
 
