@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search image</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+
+<body>
+  <load="partials/header.html" />
+
+  <form class="searchForm">
+    <input type="text" name="searchImage" id="searchImage" class="searchInput" placeholder="Search images..." />
+    <button type="submit" class="searchButtonSubmit">Search</button>
+  </form>
+
+  <div class="container-image">
+
+  </div>
+
+  <p class="message-load-Images isHidden" id="searchImageText">Loading images, please wait...</p>
+
+  <script type="module" src="./main.js" defer></script>
+</body>
+
+</html>
