@@ -26,6 +26,8 @@ let imageArray;
 
 loadMoreButton.addEventListener('click', event => {
 
+  showHidemessageLoad();
+  
   currentPages += 1;
   getImage(localStorage.getItem("searchImage"))
   .then(posts => {
