@@ -26,9 +26,12 @@ let totalHits=0;
 //++loadMoreButton
 loadMoreButton.addEventListener('click', event => {
 
+  const galleryCardHeight = document.querySelector('.photo-card').getBoundingClientRect().height;
+  currentPages += 1;
+
   showHidemessageLoad();
   
-  currentPages += 1;
+
   getImage(localStorage.getItem("searchImage"))
   .then(posts => {
     imageArray = posts;
@@ -48,6 +51,12 @@ loadMoreButton.addEventListener('click', event => {
       render(true);
       controlEndsOfImage();
       openLightbox();
+
+      window.scrollBy({
+        top: galleryCardHeight * 2,
+        behavior: 'smooth'
+      });
+
     }
   })
 
