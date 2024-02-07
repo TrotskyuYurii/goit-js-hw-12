@@ -28,6 +28,7 @@ loadMoreButton.addEventListener('click', event => {
 
   currentPages += 1;
   console.log('currentpag',currentPages);
+  
 
 
 });
