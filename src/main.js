@@ -19,11 +19,11 @@ const container = document.querySelector('.container-image');
 const loadMoreButton = document.getElementById('loadMoreButton');
 let currentPages = 1;
 let imageArray;
+let totalHits=0;
 
 
 
 //++loadMoreButton
-
 loadMoreButton.addEventListener('click', event => {
 
   showHidemessageLoad();
@@ -46,14 +46,15 @@ loadMoreButton.addEventListener('click', event => {
       loadMoreButton.classList.remove('isHidden');
       imageArray.push(...posts);
       render(true);
+      controlEndsOfImage();
       openLightbox();
     }
   })
-  
-
 
 });
 //--
+
+
 
 //++myForm
 myForm.addEventListener('submit', event => {
@@ -84,6 +85,16 @@ myForm.addEventListener('submit', event => {
           });
           render();
           loadMoreButton.classList.add('isHidden');
+        } else if (totalHits <= 20) {
+          showHidemessageLoad();
+          render();
+          loadMoreButton.classList.add('isHidden');
+          openLightbox();
+          iziToast.info({
+            message: "We're sorry, but you've reached the end of search results.",
+            position: 'topRight',
+          });
+          return;
         } else {
           showHidemessageLoad();
           loadMoreButton.classList.remove('isHidden');
@@ -101,10 +112,6 @@ myForm.addEventListener('submit', event => {
 //++pixabay
 async function getImage(inputValue) {
 
-
-console.log(inputValue,currentPages);
-
-
   const API_KEY = '25736683-f5d7a17cce89782c978955728';
   const URL =
     'https://pixabay.com/api/?key=' +
@@ -114,7 +121,8 @@ console.log(inputValue,currentPages);
     '&image_type=photo&orientation=horizontal&safe_search=true&page='+currentPages+'&per_page=15&';
 
   const response = await axios.post (URL, );
-
+  totalHits = response.data.totalHits;
+  console.log(response.data.totalHits);
   return response.data.hits;
 
 }
@@ -165,9 +173,19 @@ function render(addMore = false) {
   } else  {
   container.innerHTML = markup;
 }
+
 }
 //--
 
+function controlEndsOfImage() {
+  if (imageArray.length === totalHits) {
+    loadMoreButton.classList.add('isHidden');
+    iziToast.info({
+      message: "We're sorry, but you've reached the end of search results.",
+      position: 'topRight',
+    });
+  }
+}
 
 
 //++Підключення Lightbox
