@@ -85,7 +85,7 @@ myForm.addEventListener('submit', event => {
           });
           render();
           loadMoreButton.classList.add('isHidden');
-        } else if (totalHits <= 20) {
+        } else if (totalHits <= 15) {
           showHidemessageLoad();
           render();
           loadMoreButton.classList.add('isHidden');
