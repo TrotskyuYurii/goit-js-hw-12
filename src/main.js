@@ -27,7 +27,26 @@ let imageArray;
 loadMoreButton.addEventListener('click', event => {
 
   currentPages += 1;
-  getImage(localStorage.getItem("searchImage"));
+  getImage(localStorage.getItem("searchImage"))
+  .then(posts => {
+    imageArray = posts;
+    if (imageArray.length === 0) {
+      showHidemessageLoad();
+      iziToast.error({
+        message:
+          'Sorry, there are no images matching your search query. Please try again!',
+        position: 'topRight',
+      });
+      render();
+      loadMoreButton.classList.add('isHidden');
+    } else {
+      showHidemessageLoad();
+      loadMoreButton.classList.remove('isHidden');
+      imageArray.push(...posts);
+      render();
+      openLightbox();
+    }
+  })
   
 
 
