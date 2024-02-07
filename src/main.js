@@ -122,7 +122,6 @@ async function getImage(inputValue) {
 
   const response = await axios.post (URL, );
   totalHits = response.data.totalHits;
-  console.log(response.data.totalHits);
   return response.data.hits;
 
 }
