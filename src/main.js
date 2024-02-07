@@ -16,6 +16,8 @@ import axios from 'axios';
 const myForm = document.querySelector('form');
 const messageLoad = document.getElementById('searchImageText');
 const container = document.querySelector('.container-image');
+const loadMoreButton = document.getElementById('loadMoreButton');
+let currentPages = 1;
 
 let imageArray;
 
@@ -46,10 +48,9 @@ myForm.addEventListener('submit', event => {
           render();
         } else {
           showHidemessageLoad();
+          showHideloadMoreButton();
           render();
           openLightbox();
-          // console.log(imageArray);
-          // myForm.reset();
         }
       })
       .catch(error => {
@@ -68,7 +69,7 @@ async function getImage(inputValue) {
     API_KEY +
     '&q=' +
     encodeURIComponent(inputValue) +
-    '&image_type=photo&orientation=horizontal&safe_search=true&per_page=9';
+    '&image_type=photo&orientation=horizontal&safe_search=true&page='+currentPages+'&per_page=15&';
 
   const response = await axios.post (URL, );
 
@@ -80,6 +81,12 @@ async function getImage(inputValue) {
 //++Керування відображенням напису завантаження
 function showHidemessageLoad() {
   messageLoad.classList.toggle('isHidden');
+}
+//--
+
+//++Керування відображенням кнопки "Load more"
+function showHideloadMoreButton() {
+  loadMoreButton.classList.toggle('isHidden');
 }
 //--
 
@@ -115,7 +122,6 @@ function productListTemplate() {
 function render() {
   const markup = productListTemplate();
   container.innerHTML = markup;
-  console.log('render');
 }
 //--
 
