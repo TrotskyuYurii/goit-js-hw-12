@@ -27,7 +27,7 @@ let imageArray;
 loadMoreButton.addEventListener('click', event => {
 
   currentPages += 1;
-  console.log('currentpag',currentPages);
+  getImage(localStorage.getItem("searchImage"));
   
 
 
@@ -48,6 +48,8 @@ myForm.addEventListener('submit', event => {
     });
     return;
   } else {
+    currentPages = 1;
+    localStorage.setItem("searchImage", inputValue.trim());
     showHidemessageLoad();
     getImage(inputValue)
       .then(posts => {
@@ -77,6 +79,10 @@ myForm.addEventListener('submit', event => {
 
 //++pixabay
 async function getImage(inputValue) {
+
+
+console.log(inputValue,currentPages);
+
 
   const API_KEY = '25736683-f5d7a17cce89782c978955728';
   const URL =
