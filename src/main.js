@@ -43,7 +43,7 @@ loadMoreButton.addEventListener('click', event => {
       showHidemessageLoad();
       loadMoreButton.classList.remove('isHidden');
       imageArray.push(...posts);
-      render();
+      render(true);
       openLightbox();
     }
   })
@@ -155,9 +155,14 @@ function productListTemplate() {
   return imageArray.map(productTemplate).join('');
 }
 
-function render() {
+function render(addMore = false) {
   const markup = productListTemplate();
+
+  if (addMore) {
+    container.insertAdjacentHTML('beforeend', markup);
+  } else  {
   container.innerHTML = markup;
+}
 }
 //--
 
