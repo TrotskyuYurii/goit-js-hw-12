@@ -12,15 +12,28 @@ import axios from 'axios';
 
 
 
-//++myForm
+
 const myForm = document.querySelector('form');
 const messageLoad = document.getElementById('searchImageText');
 const container = document.querySelector('.container-image');
 const loadMoreButton = document.getElementById('loadMoreButton');
 let currentPages = 1;
-
 let imageArray;
 
+
+
+//++loadMoreButton
+
+loadMoreButton.addEventListener('click', event => {
+
+  currentPages += 1;
+  console.log('currentpag',currentPages);
+
+
+});
+//--
+
+//++myForm
 myForm.addEventListener('submit', event => {
   event.preventDefault();
 
@@ -46,9 +59,10 @@ myForm.addEventListener('submit', event => {
             position: 'topRight',
           });
           render();
+          loadMoreButton.classList.add('isHidden');
         } else {
           showHidemessageLoad();
-          showHideloadMoreButton();
+          loadMoreButton.classList.remove('isHidden');
           render();
           openLightbox();
         }
@@ -84,11 +98,7 @@ function showHidemessageLoad() {
 }
 //--
 
-//++Керування відображенням кнопки "Load more"
-function showHideloadMoreButton() {
-  loadMoreButton.classList.toggle('isHidden');
-}
-//--
+
 
 //++Рендер структури галереї 
 function productTemplate(item) {
