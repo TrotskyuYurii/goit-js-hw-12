@@ -98,10 +98,6 @@
   padding: 0 20px;
 }
 
-.isHidden {
-  display: none;
-}
-
 .container-image {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -169,4 +165,8 @@
 
 .loadMoreButton:hover {
   background: #6C8CFF;
+}
+
+.isHidden {
+  display: none;
 }
