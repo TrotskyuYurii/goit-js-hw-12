@@ -129,7 +129,7 @@ async function getImage(inputValue) {
     encodeURIComponent(inputValue) +
     '&image_type=photo&orientation=horizontal&safe_search=true&page='+currentPages+'&per_page=15&';
 
-  const response = await axios.post (URL, );
+  const response = await axios.get (URL, );
   totalHits = response.data.totalHits;
   return response.data.hits;
 
