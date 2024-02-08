@@ -21,7 +21,13 @@ let currentPages = 1;
 let imageArray;
 let totalHits=0;
 let inputValue='';
+let galleryDll;
 
+//Запускаємо галерею після заванатаження сторінки
+document.addEventListener('DOMContentLoaded', function() {
+  openLightbox();
+});
+//--
 
 
 //++loadMoreButton
@@ -51,7 +57,8 @@ loadMoreButton.addEventListener('click', event => {
       imageArray.push(...posts);
       render(true);
       controlEndsOfImage();
-      openLightbox();
+      // openLightbox();
+      galleryDll.refresh();
 
       window.scrollBy({
         top: galleryCardHeight * 2,
@@ -98,7 +105,9 @@ myForm.addEventListener('submit', event => {
           showHidemessageLoad();
           render();
           loadMoreButton.classList.add('isHidden');
-          openLightbox();
+          // openLightbox();
+          galleryDll.refresh();
+
           iziToast.info({
             message: "We're sorry, but you've reached the end of search results.",
             position: 'topRight',
@@ -108,7 +117,9 @@ myForm.addEventListener('submit', event => {
           showHidemessageLoad();
           loadMoreButton.classList.remove('isHidden');
           render();
-          openLightbox();
+          // openLightbox();
+
+          galleryDll.refresh();
         }
       })
       .catch(error => {
@@ -206,7 +217,7 @@ function openLightbox() {
 
   };
 
-  let galleryDll = new SimpleLightbox('.container-image a', options);
+  galleryDll = new SimpleLightbox('.container-image a', options);
   galleryDll.on('show.simplelightbox', function () {});
   galleryDll.refresh();
 }
