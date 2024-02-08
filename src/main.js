@@ -20,6 +20,7 @@ const loadMoreButton = document.getElementById('loadMoreButton');
 let currentPages = 1;
 let imageArray;
 let totalHits=0;
+let inputValue='';
 
 
 
@@ -32,7 +33,7 @@ loadMoreButton.addEventListener('click', event => {
   showHidemessageLoad();
   
 
-  getImage(localStorage.getItem("searchImage"))
+  getImage(inputValue)
   .then(posts => {
     imageArray = posts;
     if (imageArray.length === 0) {
@@ -70,7 +71,7 @@ myForm.addEventListener('submit', event => {
   event.preventDefault();
 
   const searchInput = document.getElementById('searchImage');
-  const inputValue = searchInput.value;
+  inputValue = searchInput.value;
 
   if (inputValue.trim() === '') {
     iziToast.info({
@@ -80,7 +81,6 @@ myForm.addEventListener('submit', event => {
     return;
   } else {
     currentPages = 1;
-    localStorage.setItem("searchImage", inputValue.trim());
     showHidemessageLoad();
     getImage(inputValue)
       .then(posts => {
